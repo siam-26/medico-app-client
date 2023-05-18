@@ -31,7 +31,7 @@ const CardsInfo = () => {
         },
     ];
     return (
-        <div className='grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-8'>
+        <div className='grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-16'>
             {
                 infoCards.map(infoCard=><CardInfo
                 key={infoCard.id}
