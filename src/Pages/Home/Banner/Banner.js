@@ -4,7 +4,7 @@ import bannerchair from '../../../assets/images/chair.png'
 
 const Banner = () => {
     return (
-        <div>
+        <div className='mt-16 lg:mt-24'>
             <div className="hero banner">
    <div className="hero-content flex-col lg:flex-row-reverse">
     <img src={bannerchair} className="rounded-lg shadow-2xl lg:w-1/2" />
