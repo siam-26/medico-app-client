@@ -3,7 +3,7 @@ import treatment from '../../../assets/images/treatment.png';
 
 const TreatmentSection = () => {
     return (
-        <div className="hero mt-24">
+        <div className="hero mt-16 lg:mt-24">
   <div className="hero-content  flex-col lg:flex-row lg:w-10/12">
     <div className='w-full lg:w-5/12'>
     <img src={treatment} className="rounded-lg shadow-2xl" />
