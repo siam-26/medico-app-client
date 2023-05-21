@@ -2,14 +2,14 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 
-const Login = () => {
+const Signup = () => {
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
 
-  const handleLogin = (data) => {
+  const handleSignup = (data) => {
     console.log(data.password);
   };
   return (
@@ -17,11 +17,31 @@ const Login = () => {
       <div>
         <div className="hero">
           <div className="card flex-shrink-0 w-full  shadow-2xl ">
-            <h1 className="text-center text-xl font-semibold pt-10">Login</h1>
+            <h1 className="text-center text-xl font-semibold pt-10">Sign Up</h1>
             <form
-              onSubmit={handleSubmit(handleLogin)}
-              className="px-10 md:px-24">
-              <div className="form-control py-3">
+              onSubmit={handleSubmit(handleSignup)}
+              className="px-10 md:px-32">
+              <div className="form-control py-2">
+                <label className="label">
+                  <span className="label-text font-semibold">Name</span>
+                </label>
+                <input
+                  type="text"
+                  {...register("name", {
+                    required: "Name is required",
+                  })}
+                  placeholder="your name"
+                  className="input input-bordered"
+                  aria-invalid={errors.name ? "true" : "false"}
+                />
+                {errors.name && (
+                  <p className="mt-2 text-red-600" role="alert">
+                    {errors.name?.message}
+                  </p>
+                )}
+              </div>
+
+              <div className="form-control pb-2">
                 <label className="label">
                   <span className="label-text font-semibold">Email</span>
                 </label>
@@ -65,13 +85,13 @@ const Login = () => {
                 </label>
               </div>
               <div className="form-control mt-6">
-                <button className="btn text-white">Login</button>
+                <button className="btn text-white">Signup</button>
               </div>
             </form>
             <p className="text-center text-xs pt-6 ">
-              New to MEDICO-APP?{" "}
-              <Link className="text-secondary" to="/signup">
-                Create new account
+              Already have an account?{" "}
+              <Link className="text-secondary" to="/login">
+                login
               </Link>
             </p>
 
@@ -87,4 +107,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Signup;
