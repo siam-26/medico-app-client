@@ -1,16 +1,42 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../Context Api/AuthProvider";
+import { toast } from "react-hot-toast";
+import ProgressLoading from "../../Components/ProgressLoading/ProgressLoading";
 
 const Signup = () => {
+  const { createUser, userUpdate, loading } = useContext(AuthContext);
+  const [passError, setPassError] = useState("");
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
 
+  if (loading) {
+    return <ProgressLoading></ProgressLoading>;
+  }
+
   const handleSignup = (data) => {
-    console.log(data.password);
+    createUser(data.email, data.password)
+      .then((result) => {
+        const user = result.user;
+        setPassError("");
+        toast("user created successfully");
+
+        const userInfo = {
+          displayName: data.name,
+        };
+
+        userUpdate(userInfo)
+          .then(() => {})
+          .catch((error) => console.log(error));
+        console.log(user);
+      })
+      .catch((error) => {
+        setPassError(error.message);
+      });
   };
   return (
     <div className="h-[600px] md:h-[700px] flex justify-center items-center">
@@ -76,6 +102,11 @@ const Signup = () => {
                 {errors.password && (
                   <p className="mt-2 text-red-600" role="alert">
                     {errors.password?.message}
+                  </p>
+                )}
+                {passError && (
+                  <p className="text-red-600">
+                    Password should be 6 characters.
                   </p>
                 )}
                 <label className="label">

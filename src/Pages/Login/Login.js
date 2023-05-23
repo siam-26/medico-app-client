@@ -1,16 +1,36 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { AuthContext } from "../../Context Api/AuthProvider";
+import ProgressLoading from "../../Components/ProgressLoading/ProgressLoading";
 
 const Login = () => {
+  const { signIn,loading } = useContext(AuthContext);
+  const [passError, setPassError] = useState("");
+  const navigate=useNavigate();
+  const location=useLocation();
+
+  const from=location.state?.from?.pathname || "/";
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
 
+  if(loading){
+    return <ProgressLoading></ProgressLoading>
+  }
+
   const handleLogin = (data) => {
-    console.log(data.password);
+    signIn(data.email, data.password)
+      .then((result) => {
+        const user = result.user;
+        console.log(user);
+        navigate(from,{replace:true});
+        setPassError("");
+      })
+      .catch((error) => setPassError(error.message));
   };
   return (
     <div className="h-[600px] md:h-[700px] flex justify-center items-center">
@@ -56,6 +76,11 @@ const Login = () => {
                 {errors.password && (
                   <p className="mt-2 text-red-600" role="alert">
                     {errors.password?.message}
+                  </p>
+                )}
+                {passError && (
+                  <p className="text-red-600">
+                    Password should be 6 characters.
                   </p>
                 )}
                 <label className="label">
