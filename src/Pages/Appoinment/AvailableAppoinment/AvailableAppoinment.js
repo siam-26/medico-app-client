@@ -2,16 +2,19 @@ import { format } from "date-fns";
 import React, { useEffect, useState } from "react";
 import AvailableOption from "./AvailableOption";
 import BookingModal from "../BookingModal/BookingModal";
+import { useQuery } from "@tanstack/react-query";
 
 const AvailableAppoinment = ({ selectedDate }) => {
-  const [appoinmentOptions, setAppoinmentOptions] = useState([]);
+ 
   const [treatment, setTreatment] = useState(null);
 
-  useEffect(() => {
-    fetch("services.json")
-      .then((response) => response.json())
-      .then((data) => setAppoinmentOptions(data));
-  }, []);
+  const { data: appoinmentOptions = [] } = useQuery({
+    queryKey: ["appoinmentOptions"],
+    queryFn: () =>
+      fetch("http://localhost:5000/appoinmentOptions").then((res) =>
+        res.json()
+      ),
+  });
 
   return (
     <section className="mt-16 lg:mt-24 flex justify-center md:block">

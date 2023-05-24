@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Context Api/AuthProvider";
 import { toast } from "react-hot-toast";
 import ProgressLoading from "../../Components/ProgressLoading/ProgressLoading";
@@ -8,6 +8,7 @@ import ProgressLoading from "../../Components/ProgressLoading/ProgressLoading";
 const Signup = () => {
   const { createUser, userUpdate, loading } = useContext(AuthContext);
   const [passError, setPassError] = useState("");
+  const navigate=useNavigate();
   const {
     register,
     handleSubmit,
@@ -30,7 +31,9 @@ const Signup = () => {
         };
 
         userUpdate(userInfo)
-          .then(() => {})
+          .then(() => {
+            navigate('/');
+          })
           .catch((error) => console.log(error));
         console.log(user);
       })
