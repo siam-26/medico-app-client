@@ -3,9 +3,9 @@ import React, { useContext } from "react";
 import { AuthContext } from "../../../Context Api/AuthProvider";
 import { toast } from "react-hot-toast";
 
-const BookingModal = ({ treatment, selectedDate }) => {
+const BookingModal = ({ treatment, selectedDate, refetch }) => {
   const { user } = useContext(AuthContext);
-  const { name, slots } = treatment;
+  const { name: treatmentName, slots } = treatment;
   const date = format(selectedDate, "PP");
 
   const handleBooking = (event) => {
@@ -18,7 +18,7 @@ const BookingModal = ({ treatment, selectedDate }) => {
 
     const booking = {
       appoinmentDate: date,
-      treatment: name,
+      treatment: treatmentName,
       patient: name,
       email,
       slot,
@@ -37,6 +37,7 @@ const BookingModal = ({ treatment, selectedDate }) => {
         if (data.acknowledged) {
           console.log(data);
           toast.success("booking confirmed");
+          refetch();
         }
       });
   };
@@ -50,7 +51,7 @@ const BookingModal = ({ treatment, selectedDate }) => {
             className="btn btn-sm btn-circle absolute right-2 top-2">
             ✕
           </label>
-          <h3 className="text-lg font-bold">{name}</h3>
+          <h3 className="text-lg font-bold">{treatmentName}</h3>
 
           <form
             onSubmit={handleBooking}
