@@ -2,8 +2,9 @@ import { format } from "date-fns";
 import React, { useContext } from "react";
 import { AuthContext } from "../../../Context Api/AuthProvider";
 import { toast } from "react-hot-toast";
+import ProgressLoading from "../../../Components/ProgressLoading/ProgressLoading";
 
-const BookingModal = ({ treatment, selectedDate, refetch }) => {
+const BookingModal = ({ treatment, selectedDate, refetch, isLoading }) => {
   const { user } = useContext(AuthContext);
   const { name: treatmentName, slots } = treatment;
   const date = format(selectedDate, "PP");
@@ -36,11 +37,19 @@ const BookingModal = ({ treatment, selectedDate, refetch }) => {
       .then((data) => {
         if (data.acknowledged) {
           console.log(data);
-          toast.success("booking confirmed");
+          toast.success("Booking confirmed");
           refetch();
+        } 
+        else {
+          toast.error(data.message);
         }
       });
   };
+
+  if (isLoading) {
+    <ProgressLoading></ProgressLoading>;
+  }
+
   return (
     <div>
       <input type="checkbox" id="my-modal-3" className="modal-toggle" />
