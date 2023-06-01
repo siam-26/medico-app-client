@@ -8,7 +8,7 @@ import ProgressLoading from "../../Components/ProgressLoading/ProgressLoading";
 const Signup = () => {
   const { createUser, userUpdate, loading } = useContext(AuthContext);
   const [passError, setPassError] = useState("");
-  const navigate=useNavigate();
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -32,15 +32,33 @@ const Signup = () => {
 
         userUpdate(userInfo)
           .then(() => {
-            navigate('/');
+            saveUser(data.name, data.email);
           })
           .catch((error) => console.log(error));
-        console.log(user);
       })
       .catch((error) => {
         setPassError(error.message);
       });
   };
+
+  //save user
+  const saveUser = (name, email) => {
+    const userSave = { name, email };
+
+    fetch("http://localhost:5000/users", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(userSave),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        navigate("/");
+      });
+  };
+
   return (
     <div className="h-[600px] md:h-[700px] flex justify-center items-center">
       <div>

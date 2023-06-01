@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { AuthContext } from "../../Context Api/AuthProvider";
 import { useQuery } from "@tanstack/react-query";
+import ProgressLoading from "../../Components/ProgressLoading/ProgressLoading";
 
 const MyAppoinment = () => {
   const { user } = useContext(AuthContext);
@@ -15,6 +16,10 @@ const MyAppoinment = () => {
       return data;
     },
   });
+
+  if(isLoading){
+    return <ProgressLoading/>
+  }
 
   return (
     <div className="w-full">
@@ -32,7 +37,7 @@ const MyAppoinment = () => {
         <tbody>
           {bookings &&
             bookings.map((book, i) => (
-              <tr>
+              <tr key={book._id}>
                 <th>{i+1}</th>
                 <td>{book.patient}</td>
                 <td>{book.treatment}</td>
