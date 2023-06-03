@@ -11,14 +11,18 @@ const MyAppoinment = () => {
   const { data: bookings = [], isLoading } = useQuery({
     queryKey: ["myAppoinment", user?.email],
     queryFn: async () => {
-      const res = await fetch(url);
+      const res = await fetch(url, {
+        headers: {
+          authorization: `bearer ${localStorage.getItem("accessToken")}`,
+        },
+      });
       const data = await res.json();
       return data;
     },
   });
 
-  if(isLoading){
-    return <ProgressLoading/>
+  if (isLoading) {
+    return <ProgressLoading />;
   }
 
   return (
@@ -38,7 +42,7 @@ const MyAppoinment = () => {
           {bookings &&
             bookings.map((book, i) => (
               <tr key={book._id}>
-                <th>{i+1}</th>
+                <th>{i + 1}</th>
                 <td>{book.patient}</td>
                 <td>{book.treatment}</td>
                 <td>{book.appoinmentDate}</td>

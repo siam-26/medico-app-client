@@ -4,11 +4,17 @@ import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Context Api/AuthProvider";
 import { toast } from "react-hot-toast";
 import ProgressLoading from "../../Components/ProgressLoading/ProgressLoading";
+import useToken from "../../Hooks/useToken";
+import useToken from "../../Hooks/useToken";
 
 const Signup = () => {
   const { createUser, userUpdate, loading } = useContext(AuthContext);
   const [passError, setPassError] = useState("");
+  const [createdUserEmail,setCreatedUserEmail]=useState('');
+  const [token]=useToken(createdUserEmail);
+  
   const navigate = useNavigate();
+  
   const {
     register,
     handleSubmit,
@@ -17,6 +23,10 @@ const Signup = () => {
 
   if (loading) {
     return <ProgressLoading></ProgressLoading>;
+  }
+
+  if(token){
+    navigate('/');
   }
 
   const handleSignup = (data) => {
@@ -55,7 +65,7 @@ const Signup = () => {
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
-        navigate("/");
+        setCreatedUserEmail(email);
       });
   };
 
