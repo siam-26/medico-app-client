@@ -5,7 +5,7 @@ import { toast } from "react-hot-toast";
 
 const AllUsers = () => {
   const {
-    data: users = [],
+    data: allUsers = [],
     isLoading,
     refetch,
   } = useQuery({
@@ -53,8 +53,8 @@ const AllUsers = () => {
             </tr>
           </thead>
           <tbody>
-            {users &&
-              users.map((user, i) => (
+            {allUsers &&
+              allUsers.map((user, i) => (
                 <tr key={user._id}>
                   <th>{i + 1}</th>
                   <td>{user?.name}</td>
