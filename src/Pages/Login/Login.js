@@ -3,14 +3,21 @@ import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Context Api/AuthProvider";
 import ProgressLoading from "../../Components/ProgressLoading/ProgressLoading";
+import useToken from "../../Hooks/useToken";
 
 const Login = () => {
-  const { signIn,loading } = useContext(AuthContext);
+  const { signIn, loading } = useContext(AuthContext);
   const [passError, setPassError] = useState("");
-  const navigate=useNavigate();
-  const location=useLocation();
+  const [userLogIn, setUserLogIn] = useState("");
+  const [token] = useToken(userLogIn);
+  const navigate = useNavigate();
+  const location = useLocation();
 
-  const from=location.state?.from?.pathname || "/";
+  const from = location.state?.from?.pathname || "/";
+
+  if (token) {
+    navigate(from, { replace: true });
+  }
 
   const {
     register,
@@ -18,16 +25,18 @@ const Login = () => {
     formState: { errors },
   } = useForm();
 
-  if(loading){
-    return <ProgressLoading></ProgressLoading>
+  if (loading) {
+    return <ProgressLoading></ProgressLoading>;
   }
+
+  
 
   const handleLogin = (data) => {
     signIn(data.email, data.password)
       .then((result) => {
         const user = result.user;
         console.log(user);
-        navigate(from,{replace:true});
+        setUserLogIn(data.email);
         setPassError("");
       })
       .catch((error) => setPassError(error.message));

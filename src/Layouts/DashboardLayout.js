@@ -1,5 +1,5 @@
 import React from "react";
-import { Outlet } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 import NavBarDashboard from "../Pages/Dashboard/NavBarDashboard/NavBarDashboard";
 
 const DashboardLayout = () => {
@@ -15,10 +15,10 @@ const DashboardLayout = () => {
           <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
           <ul className="menu p-4 w-80 h-full text-base-content bg-sky-50 lg:bg-white">
             <li>
-              <a>Sidebar Item 1</a>
+              <Link to="/dashboard">My Appoinment</Link>
             </li>
             <li>
-              <a>Sidebar Item 2</a>
+              <Link to="/dashboard/allUsers">All Users</Link>
             </li>
           </ul>
         </div>

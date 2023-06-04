@@ -5,7 +5,7 @@ import { AuthContext } from "../../Context Api/AuthProvider";
 import { toast } from "react-hot-toast";
 import ProgressLoading from "../../Components/ProgressLoading/ProgressLoading";
 import useToken from "../../Hooks/useToken";
-import useToken from "../../Hooks/useToken";
+
 
 const Signup = () => {
   const { createUser, userUpdate, loading } = useContext(AuthContext);
@@ -14,7 +14,11 @@ const Signup = () => {
   const [token]=useToken(createdUserEmail);
   
   const navigate = useNavigate();
-  
+
+  if(token){
+    navigate('/');
+  }
+
   const {
     register,
     handleSubmit,
@@ -25,9 +29,7 @@ const Signup = () => {
     return <ProgressLoading></ProgressLoading>;
   }
 
-  if(token){
-    navigate('/');
-  }
+  
 
   const handleSignup = (data) => {
     createUser(data.email, data.password)
