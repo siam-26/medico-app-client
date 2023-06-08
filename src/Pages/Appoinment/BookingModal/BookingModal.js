@@ -6,7 +6,7 @@ import ProgressLoading from "../../../Components/ProgressLoading/ProgressLoading
 
 const BookingModal = ({ treatment, selectedDate, refetch, isLoading }) => {
   const { user } = useContext(AuthContext);
-  const { name: treatmentName, slots } = treatment;
+  const { name: treatmentName, slots, price } = treatment;
   const date = format(selectedDate, "PP");
 
   const handleBooking = (event) => {
@@ -24,6 +24,7 @@ const BookingModal = ({ treatment, selectedDate, refetch, isLoading }) => {
       email,
       slot,
       phone,
+      price,
     };
 
     fetch("http://localhost:5000/booking", {
@@ -39,8 +40,7 @@ const BookingModal = ({ treatment, selectedDate, refetch, isLoading }) => {
           console.log(data);
           toast.success("Booking confirmed");
           refetch();
-        } 
-        else {
+        } else {
           toast.error(data.message);
         }
       });

@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { AuthContext } from "../../Context Api/AuthProvider";
 import { useQuery } from "@tanstack/react-query";
 import ProgressLoading from "../../Components/ProgressLoading/ProgressLoading";
+import { Link } from "react-router-dom";
 
 const MyAppoinment = () => {
   const { user } = useContext(AuthContext);
@@ -36,6 +37,7 @@ const MyAppoinment = () => {
             <th>Treatment</th>
             <th>Date</th>
             <th>Time</th>
+            <th>Pay</th>
           </tr>
         </thead>
         <tbody>
@@ -47,6 +49,15 @@ const MyAppoinment = () => {
                 <td>{book.treatment}</td>
                 <td>{book.appoinmentDate}</td>
                 <td>{book.slot}</td>
+                <td>
+                  {book.price && !book.paid && (
+                    <Link to={`/dashboard/payment/${book._id}`}>
+                      <button className="btn btn-sm btn-primary">Pay</button>
+                    </Link>
+                  )}
+
+                  {book.price && book.paid && <span>Paid</span>}
+                </td>
               </tr>
             ))}
         </tbody>

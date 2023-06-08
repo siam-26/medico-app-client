@@ -1,9 +1,17 @@
 import { useQuery } from "@tanstack/react-query";
-import React from "react";
+import React, { useState } from "react";
 import ProgressLoading from "../../../Components/ProgressLoading/ProgressLoading";
+import ConfirmationModal from "../../Shared/ConfirmationModal/ConfirmationModal";
+import { toast } from "react-hot-toast";
 
 const ManageDoctors = () => {
-  const { data: doctors=[], isLoading } = useQuery({
+  const [deleteDoctor, setDeleteDoctor] = useState(null);
+
+  const {
+    data: doctors = [],
+    isLoading,
+    refetch,
+  } = useQuery({
     queryKey: ["doctors"],
     queryFn: async () => {
       try {
@@ -19,6 +27,26 @@ const ManageDoctors = () => {
       }
     },
   });
+
+  const cancelDeleting = () => {
+    return setDeleteDoctor(null);
+  };
+
+  const removeDoctor = (id) => {
+    fetch(`http://localhost:5000/doctors/${id}`, {
+      method: "DELETE",
+      headers: {
+        authorization: `bearer ${localStorage.getItem("accessToken")}`,
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.deletedCount > 0) {
+          toast.success("Successfully removed");
+          refetch();
+        }
+      });
+  };
 
   if (isLoading) {
     return <ProgressLoading />;
@@ -57,12 +85,28 @@ const ManageDoctors = () => {
                   <td>{doctor.name}</td>
                   <td>{doctor.email}</td>
                   <td>{doctor.specialty}</td>
-                  <td><button className="btn btn-sm">Delete</button></td>
+                  <td>
+                    <label
+                      onClick={() => setDeleteDoctor(doctor)}
+                      htmlFor="my_modal_6"
+                      className="btn btn-sm">
+                      Remove
+                    </label>
+                  </td>
                 </tr>
               ))}
           </tbody>
         </table>
       </div>
+      {deleteDoctor && (
+        <ConfirmationModal
+          title={`Are you sure you want to remove '${deleteDoctor.name}'?`}
+          message={`If you remove '${deleteDoctor.name}', it cannot be undone.`}
+          cancelDeleting={cancelDeleting}
+          removeDoctor={removeDoctor}
+          deleteDoctor={deleteDoctor}
+        />
+      )}
     </div>
   );
 };

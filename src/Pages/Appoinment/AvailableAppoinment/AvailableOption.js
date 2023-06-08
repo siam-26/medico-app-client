@@ -1,7 +1,7 @@
 import React from "react";
 
-const AvailableOption = ({ option,setTreatment }) => {
-  const { name, slots } = option;
+const AvailableOption = ({ option, setTreatment }) => {
+  const { name, slots, price } = option;
   return (
     <div>
       <div className="card shadow-xl">
@@ -13,8 +13,16 @@ const AvailableOption = ({ option,setTreatment }) => {
           <p>
             {slots?.length} {slots?.length > 2 ? "slots" : "slot"} available
           </p>
+
+          <p className="font-semibold">
+            <small>$ {price}</small>
+          </p>
+
           <div className="card-actions justify-center">
-            <label onClick={()=>setTreatment(option)} htmlFor="my-modal-3" className="btn border-0 bg-gradient-to-r from-primary to-secondary text-white">
+            <label
+              onClick={() => setTreatment(option)}
+              htmlFor="my-modal-3"
+              className="btn border-0 bg-gradient-to-r from-primary to-secondary text-white">
               Book Appoinment
             </label>
           </div>
