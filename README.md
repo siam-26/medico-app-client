@@ -2,7 +2,7 @@
 MEDICO-APP
 
 ## Live Site
-Link: <a href="https://disney-plus-clone-fd976.web.app/">MEDICO-APP</a> <br>
+Link: <a href="https://medico-app-12b4c.web.app/">MEDICO-APP</a> <br>
 Code: <a href="https://github.com/siam-26/medico-app-client">GitHub</a>
 
 ## Server Site
