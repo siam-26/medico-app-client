@@ -9,7 +9,7 @@ const AddDoctor = () => {
   const { data: specialties, isLoading } = useQuery({
     queryKey: ["specialty"],
     queryFn: async () => {
-      const res = await fetch("http://localhost:5000/specialty");
+      const res = await fetch("https://medico-care-server.vercel.app/specialty");
       const data = await res.json();
       return data;
     },
@@ -43,7 +43,7 @@ const AddDoctor = () => {
             specialty: data.select,
             image: imgData.data.url,
           };
-          fetch("http://localhost:5000/doctors", {
+          fetch("https://medico-care-server.vercel.app/doctors", {
             method: "POST",
             headers: {
               "content-type": "application/json",

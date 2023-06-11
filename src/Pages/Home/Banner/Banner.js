@@ -1,6 +1,7 @@
 import React from "react";
 import "./Banner.css";
 import bannerchair from "../../../assets/images/chair.png";
+import { Link } from "react-router-dom";
 
 const Banner = () => {
   return (
@@ -15,9 +16,11 @@ const Banner = () => {
               doctor scheduling app MEDICO-APP. Book appointments seamlessly and
               stay organized with ease.
             </p>
-            <button className="btn border-0 bg-gradient-to-r from-primary to-secondary text-white">
-              Get Started
-            </button>
+            <Link to='/appoinment'>
+              <button className="btn border-0 bg-gradient-to-r from-primary to-secondary text-white">
+                Get Started
+              </button>
+            </Link>
           </div>
         </div>
       </div>

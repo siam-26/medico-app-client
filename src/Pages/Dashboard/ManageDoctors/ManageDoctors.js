@@ -15,7 +15,7 @@ const ManageDoctors = () => {
     queryKey: ["doctors"],
     queryFn: async () => {
       try {
-        const res = await fetch("http://localhost:5000/doctors", {
+        const res = await fetch("https://medico-care-server.vercel.app/doctors", {
           headers: {
             authorization: `bearer ${localStorage.getItem("accessToken")}`,
           },
@@ -33,7 +33,7 @@ const ManageDoctors = () => {
   };
 
   const removeDoctor = (id) => {
-    fetch(`http://localhost:5000/doctors/${id}`, {
+    fetch(`https://medico-care-server.vercel.app/doctors/${id}`, {
       method: "DELETE",
       headers: {
         authorization: `bearer ${localStorage.getItem("accessToken")}`,

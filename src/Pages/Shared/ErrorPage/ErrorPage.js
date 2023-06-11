@@ -5,14 +5,15 @@ const ErrorPage = () => {
   const error = useRouteError();
 
   return (
-    <div className="flex align-center justify-center">
+    
+    <div className="w-full text-center my-32">
       <div>
-      <p className="text-red-500">Something went wrong!!</p>
-      <p className="text-red-500">
+      <p className="text-red-500 text-4xl my-2">Something went wrong!!</p>
+      <p className="text-red-500 text-xl">
         <i>{error.statusText || error.message}</i>
       </p>
       <Link to="/">
-        <button className="btn btn-primary">Home</button>
+        <p className="underline my-2 text-primary font-bold">Home</p>
       </Link>
       </div>
     </div>

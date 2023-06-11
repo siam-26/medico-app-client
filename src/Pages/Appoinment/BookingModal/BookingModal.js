@@ -27,7 +27,7 @@ const BookingModal = ({ treatment, selectedDate, refetch, isLoading }) => {
       price,
     };
 
-    fetch("http://localhost:5000/booking", {
+    fetch("https://medico-care-server.vercel.app/booking", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -99,8 +99,8 @@ const BookingModal = ({ treatment, selectedDate, refetch, isLoading }) => {
             />
             <input
               name="phone"
-              type="text"
-              placeholder="Phone Number"
+              type="tel"
+              placeholder="123-45-678"
               className="input w-full input-bordered"
             />
 

@@ -17,6 +17,7 @@ const Login = () => {
 
   if (token) {
     navigate(from, { replace: true });
+    window.location.reload();
   }
 
   const {
@@ -102,18 +103,18 @@ const Login = () => {
                 <button className="btn text-white">Login</button>
               </div>
             </form>
-            <p className="text-center text-xs pt-6 ">
+            <p className="text-center text-xs pt-6 pb-10">
               New to MEDICO-APP?{" "}
               <Link className="text-secondary" to="/signup">
                 Create new account
               </Link>
             </p>
 
-            <div className="divider w-5/6 mx-auto">OR</div>
+            {/* <div className="divider w-5/6 mx-auto">OR</div>
 
             <div className="w-6/6 mx-auto pb-6">
               <button className="btn btn-outline">CONTINUE WITH GOOGLE</button>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

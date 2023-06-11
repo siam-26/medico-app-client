@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 const MyAppoinment = () => {
   const { user } = useContext(AuthContext);
 
-  const url = `http://localhost:5000/myAppoinment?email=${user?.email}`;
+  const url = `https://medico-care-server.vercel.app/myAppoinment?email=${user?.email}`;
 
   const { data: bookings = [], isLoading } = useQuery({
     queryKey: ["myAppoinment", user?.email],
@@ -29,7 +29,7 @@ const MyAppoinment = () => {
   return (
     <div className="w-full">
       <table className="table w-full lg:w-11/12">
-        {/* head */}
+        
         <thead className="">
           <tr>
             <th></th>

@@ -1,17 +1,24 @@
 import { format } from "date-fns";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import AvailableOption from "./AvailableOption";
 import BookingModal from "../BookingModal/BookingModal";
 import { useQuery } from "@tanstack/react-query";
+import { AuthContext } from "../../../Context Api/AuthProvider";
+import { Link } from "react-router-dom";
 
 const AvailableAppoinment = ({ selectedDate }) => {
+  const { user } = useContext(AuthContext);
   const [treatment, setTreatment] = useState(null);
   const date = format(selectedDate, "PP");
 
-  const { data: appoinmentOptions = [], refetch, isLoading } = useQuery({
+  const {
+    data: appoinmentOptions = [],
+    refetch,
+    isLoading,
+  } = useQuery({
     queryKey: ["appoinmentOptions", date],
     queryFn: () =>
-      fetch(`http://localhost:5000/appoinmentOptions?date=${date}`).then(
+      fetch(`https://medico-care-server.vercel.app/appoinmentOptions?date=${date}`).then(
         (res) => res.json()
       ),
   });
@@ -35,15 +42,18 @@ const AvailableAppoinment = ({ selectedDate }) => {
           ))}
         </div>
 
+        {!user?.email && <p className="text-center text-sm md:text-xl  font-semibold my-10">You must have to <span className="text-primary"><Link to='/login'>Login</Link></span> to make an appoinment</p>}
+
         {treatment && (
           <BookingModal
             treatment={treatment}
             selectedDate={selectedDate}
             refetch={refetch}
-            isLoading = {isLoading}
+            isLoading={isLoading}
           />
         )}
       </div>
+      
     </section>
   );
 };

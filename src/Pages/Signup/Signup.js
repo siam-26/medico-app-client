@@ -17,6 +17,7 @@ const Signup = () => {
 
   if(token){
     navigate('/');
+    window.location.reload();
   }
 
   const {
@@ -57,7 +58,7 @@ const Signup = () => {
   const saveUser = (name, email) => {
     const userSave = { name, email };
 
-    fetch("http://localhost:5000/users", {
+    fetch("https://medico-care-server.vercel.app/users", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -152,18 +153,18 @@ const Signup = () => {
                 <button className="btn text-white">Signup</button>
               </div>
             </form>
-            <p className="text-center text-xs pt-6 ">
+            <p className="text-center text-xs pt-6 pb-10">
               Already have an account?{" "}
               <Link className="text-secondary" to="/login">
                 login
               </Link>
             </p>
 
-            <div className="divider w-5/6 mx-auto">OR</div>
+            {/* <div className="divider w-5/6 mx-auto">OR</div>
 
             <div className="w-6/6 mx-auto pb-6">
               <button className="btn btn-outline">CONTINUE WITH GOOGLE</button>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

@@ -7,7 +7,9 @@ const Navbar = () => {
 
   const handleLogOut = () => {
     logOut()
-      .then(() => {})
+      .then(() => {
+        window.location.reload()
+      })
       .catch((error) => console.log(error));
   };
   const menuItems = (
@@ -18,24 +20,18 @@ const Navbar = () => {
       <li>
         <Link to="/appoinment">Appoinment</Link>
       </li>
-      <li>
-        <Link to="/about">About</Link>
-      </li>
 
-      {user?.uid ? (
+      {
+        user?.email?
         <>
-          <li>
-            <Link to="/dashboard">Dashboard</Link>
-          </li>
-          <li>
-            <button onClick={handleLogOut}>Logout</button>
-          </li>
+          <li><Link to='/dashboard'>Dashboard</Link></li>
+          <li><button onClick={handleLogOut}>Logout</button></li>
         </>
-      ) : (
+        :
         <li>
           <Link to="/login">Login</Link>
         </li>
-      )}
+      }
     </>
   );
   return (

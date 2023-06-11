@@ -84,7 +84,7 @@ const router = createBrowserRouter([
           </AdminRoute>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/myAppoinment/${params.id}`),
+          fetch(`https://medico-care-server.vercel.app/myAppoinment/${params.id}`),
       },
     ],
   },

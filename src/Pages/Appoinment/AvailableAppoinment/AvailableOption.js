@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
+import { AuthContext } from "../../../Context Api/AuthProvider";
 
 const AvailableOption = ({ option, setTreatment }) => {
+  const { user } = useContext(AuthContext);
   const { name, slots, price } = option;
   return (
     <div>
@@ -14,19 +16,30 @@ const AvailableOption = ({ option, setTreatment }) => {
             {slots?.length} {slots?.length > 2 ? "slots" : "slot"} available
           </p>
 
-          <p className="font-semibold">
-            <small>$ {price}</small>
-          </p>
+          <p className="font-semibold">${price}</p>
 
           <div className="card-actions justify-center">
-            <label
+            {
+              user?.email?
+              <label
               onClick={() => setTreatment(option)}
               htmlFor="my-modal-3"
               className="btn border-0 bg-gradient-to-r from-primary to-secondary text-white">
               Book Appoinment
             </label>
+
+            :
+
+            <label
+              onClick={() => setTreatment(option)}
+              htmlFor="my-modal-3"
+              className="btn border-0 text-white" disabled>
+              Book Appoinment
+            </label>
+            }
           </div>
         </div>
+        
       </div>
     </div>
   );

@@ -7,7 +7,9 @@ const NavBarDashboard = () => {
 
   const handleLogOut = () => {
     logOut()
-      .then(() => {})
+      .then(() => {
+        window.location.reload();
+      })
       .catch((error) => console.log(error));
   };
   const menuItems = (
@@ -17,9 +19,6 @@ const NavBarDashboard = () => {
       </li>
       <li>
         <Link to="/appoinment">Appoinment</Link>
-      </li>
-      <li>
-        <Link to="/about">About</Link>
       </li>
 
       {user?.uid ? (
