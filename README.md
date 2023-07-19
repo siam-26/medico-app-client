@@ -2,11 +2,11 @@
 MEDICO-APP
 
 ## Live Site
-Link: <a href="https://medico-app-12b4c.web.app/">MEDICO-APP</a> <br>
-Code: <a href="https://github.com/siam-26/medico-app-client">GitHub</a>
+Live-Link: <a href="https://medico-app-12b4c.web.app/">https://medico-app-12b4c.web.app/</a> <br>
+Client-Code: <a href="https://github.com/siam-26/medico-app-client">https://github.com/siam-26/medico-app-client</a>
 
 ## Server Site
-Code Link: <a href="https://github.com/siam-26/medico-app-server">GitHub</a>
+Code Link: <a href="https://github.com/siam-26/medico-app-server">https://github.com/siam-26/medico-app-server</a>
 
 ## Features
 • Secure Authentication: Integrated Firebase Authentication for a secure login and signup process, ensuring user data protection and a smooth experience.<br>
